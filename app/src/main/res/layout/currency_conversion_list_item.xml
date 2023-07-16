@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fromCurrency"
+            type="String" />
+
+        <variable
+            name="toCurrency"
+            type="String" />
+
+        <variable
+            name="model"
+            type="com.example.currencyconverterapp.data.model.HistoricalRateModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -18,10 +34,56 @@
             android:id="@+id/tvFromValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/from"
+            android:layout_marginStart="@dimen/small_padding"
+            android:text="@{fromCurrency}"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintStart_toEndOf="@id/tvFromLabel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvToLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/to"
             android:textSize="@dimen/label_text_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tvFromLabel" />
+
+        <TextView
+            android:id="@+id/tvToValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_padding"
+            android:text="@{toCurrency}"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/tvToLabel"
+            app:layout_constraintStart_toEndOf="@id/tvToLabel"
+            app:layout_constraintTop_toTopOf="@id/tvToLabel"
+            tools:text="USD" />
+
+
+        <TextView
+            android:id="@+id/tvRateLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rate"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvToLabel" />
+
+        <TextView
+            android:id="@+id/tvRateValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_padding"
+            android:textSize="@dimen/label_text_size"
+            app:fromCurrency="@{fromCurrency}"
+            app:layout_constraintBottom_toBottomOf="@id/tvRateLabel"
+            app:layout_constraintStart_toEndOf="@id/tvRateLabel"
+            app:layout_constraintTop_toTopOf="@id/tvRateLabel"
+            app:rates="@{model.rates}"
+            app:toCurrency="@{toCurrency}"
+            tools:text="1.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

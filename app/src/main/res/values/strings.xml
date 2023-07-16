@@ -6,6 +6,7 @@
     <string name="amount">Amount</string>
     <string name="swap">swap</string>
     <string name="details">Details</string>
+    <string name="rate">Rate</string>
     <string name="from_amount_default_value">1.0</string>
 
 

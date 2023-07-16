@@ -17,21 +17,23 @@ class RetrieveHistoricalRatesUseCase @Inject constructor(
 ) {
 
     @ExperimentalCoroutinesApi
-    suspend operator fun invoke(): Flow<DataState<HistoricalRateModel>> {
+    suspend operator fun invoke(
+        currencyFrom: String, currencyTo: String
+    ): Flow<DataState<out List<HistoricalRateModel?>>> {
         return flow {
-            val currencyExchangeRates = repository.getHistoricalRates()
-            currencyExchangeRates.collect { response ->
-                when (response) {
-                    is DataState.Success -> {
-                        response.data?.let {
-                            val rates = it.toHistoricalRateModel()
-                            emit(DataState.success(rates))
-                        }
+            val historicalRates = repository.getHistoricalRates(currencyFrom, currencyTo)
+            historicalRates.collect { response ->
+
+                val historicalRateModel =
+                    response.filter { it is DataState.Success }.map { rateItem ->
+                        val item = rateItem as DataState.Success
+                        item.data?.toHistoricalRateModel()
                     }
 
-                    is DataState.Error -> {
-                        emit(DataState.error<HistoricalRateModel>(stringUtils.somethingWentWrong()))
-                    }
+                if (response.any { it is DataState.Error }) {
+                    emit(DataState.error<List<HistoricalRateModel>>(stringUtils.somethingWentWrong()))
+                } else {
+                    emit(DataState.success(historicalRateModel))
                 }
             }
         }.flowOn(Dispatchers.IO)

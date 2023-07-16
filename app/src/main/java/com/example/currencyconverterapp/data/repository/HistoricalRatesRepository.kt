@@ -5,5 +5,5 @@ import com.example.currencyconverterapp.data.model.HistoricalRatesDTO
 import kotlinx.coroutines.flow.Flow
 
 interface HistoricalRatesRepository {
-    suspend fun getHistoricalRates(): Flow<DataState<HistoricalRatesDTO>>
+    suspend fun getHistoricalRates(currencyFrom:String , currencyTo :String): Flow<MutableList<DataState<HistoricalRatesDTO>>>
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currencyconverterapp.data.DataState
-import com.example.currencyconverterapp.data.model.ExchangeRateModel
 import com.example.currencyconverterapp.data.model.HistoricalRateModel
 import com.example.currencyconverterapp.data.usecase.RetrieveHistoricalRatesUseCase
 import com.example.currencyconverterapp.utils.StringUtils
@@ -17,8 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    currencyFrom: String,
-    currencyTo: String,
     private val retrieveHistoricalRatesUseCase: RetrieveHistoricalRatesUseCase,
     private val stringUtils: StringUtils
 ) : ViewModel() {
@@ -27,18 +24,14 @@ class DetailsViewModel @Inject constructor(
     val uiStateLiveData: LiveData<UIState>
         get() = _uiState
 
-    private val _currencyExchangeModel = MutableLiveData<HistoricalRateModel>()
-    val currencyExchangeModelLiveData: LiveData<HistoricalRateModel>
+    private val _currencyExchangeModel = MutableLiveData<List<HistoricalRateModel?>>()
+    val currencyExchangeModelLiveData: LiveData<List<HistoricalRateModel?>>
         get() = _currencyExchangeModel
 
-    init {
-        retrieveHistoricalRates()
-    }
-
-    private fun retrieveHistoricalRates() {
+    fun retrieveHistoricalRates(currencyFrom: String, currencyTo: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch(Dispatchers.IO) {
-            retrieveHistoricalRatesUseCase.invoke().collect { dataState ->
+            retrieveHistoricalRatesUseCase.invoke(currencyFrom, currencyTo).collect { dataState ->
                 withContext(Dispatchers.Main) {
                     when (dataState) {
                         is DataState.Success -> {
