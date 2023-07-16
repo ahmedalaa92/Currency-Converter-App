@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Currency Converter App</string>
+
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="amount">Amount</string>
+    <string name="swap">swap</string>
+    <string name="details">Details</string>
+    <string name="from_amount_default_value">1.0</string>
+
+
+    <string name="message_no_internet_connection">No internet connection</string>
+    <string name="message_something_went_wrong">Something went wrong!</string>
+
+</resources>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.currencyconverterapp.ui.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/medium_padding"
+        android:paddingTop="@dimen/xlarge_padding"
+        android:paddingEnd="@dimen/medium_padding"
+        android:paddingBottom="@dimen/large_padding">
+
+        <TextView
+            android:id="@+id/tvFromLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/from"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintEnd_toStartOf="@id/btnSwap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvToLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/to"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnSwap"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtAmountFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_padding"
+            android:digits="0123456789."
+            android:hint="@string/amount"
+            android:inputType="numberDecimal"
+            android:text="@string/from_amount_default_value"
+            app:layout_constraintEnd_toEndOf="@id/tvFromLabel"
+            app:layout_constraintStart_toStartOf="@id/tvFromLabel"
+            app:layout_constraintTop_toBottomOf="@id/btnSwap" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtAmountTo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_padding"
+            android:hint="@string/amount"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@id/tvToLabel"
+            app:layout_constraintStart_toStartOf="@id/tvToLabel"
+            app:layout_constraintTop_toBottomOf="@id/btnSwap" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSwap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
+            android:onClick="@{() -> viewModel.onSwapButtonClicked()}"
+            android:text="@string/swap"
+            app:layout_constraintEnd_toStartOf="@id/tvToLabel"
+            app:layout_constraintStart_toEndOf="@id/tvFromLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvFromLabel" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerFromCurrency"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/currency_spinner_height"
+            app:layout_constraintBottom_toTopOf="@id/edtAmountFrom"
+            app:layout_constraintEnd_toEndOf="@id/tvFromLabel"
+            app:layout_constraintStart_toStartOf="@id/tvFromLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvFromLabel" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerToCurrency"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/currency_spinner_height"
+            app:layout_constraintBottom_toTopOf="@id/edtAmountTo"
+            app:layout_constraintEnd_toEndOf="@id/tvToLabel"
+            app:layout_constraintStart_toStartOf="@id/tvToLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvToLabel" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_padding"
+            android:onClick="@{() -> viewModel.onDetailsButtonClicked()}"
+            android:paddingStart="@dimen/large_padding"
+            android:paddingTop="@dimen/medium_padding"
+            android:paddingEnd="@dimen/large_padding"
+            android:paddingBottom="@dimen/medium_padding"
+            android:text="@string/details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtAmountFrom" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDetails" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvFromLabel,tvToLabel,btnSwap,spinnerFromCurrency,spinnerToCurrency,edtAmountFrom,edtAmountTo,btnDetails" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
