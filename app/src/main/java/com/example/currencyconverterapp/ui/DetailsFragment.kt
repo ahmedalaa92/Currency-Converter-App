@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.currencyconverterapp.R
 import com.example.currencyconverterapp.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,12 @@ class DetailsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.historicalRecyclerView.adapter = HistoricalRatesListAdapter()
+        binding.historicalRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context, DividerItemDecoration.VERTICAL
+            )
+        )
+
         val fromCurrency = DetailsFragmentArgs.fromBundle(requireArguments()).fromCurrency
         val toCurrency = DetailsFragmentArgs.fromBundle(requireArguments()).toCurrency
 

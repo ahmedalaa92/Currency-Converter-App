@@ -22,7 +22,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:listData="@{viewModel.currencyExchangeModelLiveData}" />
+            app:listData="@{viewModel.currencyExchangeModelLiveData}"
+            tools:itemCount="3"
+            tools:listitem="@layout/currency_conversion_list_item" />
 
         <ProgressBar
             android:id="@+id/progressBar"
