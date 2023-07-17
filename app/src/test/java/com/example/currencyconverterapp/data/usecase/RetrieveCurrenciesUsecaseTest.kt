@@ -1,10 +1,9 @@
-package com.example.currencyconverterapp.usecase
+package com.example.currencyconverterapp.data.usecase
 
 import com.example.currencyconverterapp.MockTestUtil
 import com.example.currencyconverterapp.data.DataState
 import com.example.currencyconverterapp.data.local.repository.LocalRepository
 import com.example.currencyconverterapp.data.repository.CurrencyRepository
-import com.example.currencyconverterapp.data.usecase.RetrieveCurrenciesUseCase
 import com.example.currencyconverterapp.utils.StringUtils
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -44,8 +43,7 @@ class RetrieveCurrenciesUsecaseTest {
         val givenCurrencyDTO = MockTestUtil.getMockCurrencyDTO()
 
         // When
-        coEvery { repository.getCurrencies() }
-            .returns(flowOf(DataState.success(givenCurrencyDTO)))
+        coEvery { repository.getCurrencies() }.returns(flowOf(DataState.success(givenCurrencyDTO)))
 
         // Invoke
         val currencyDTO = retrieveCurrencyUseCase()
