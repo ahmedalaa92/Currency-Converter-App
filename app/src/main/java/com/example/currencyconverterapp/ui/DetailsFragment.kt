@@ -24,16 +24,17 @@ class DetailsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.historicalRecyclerView.adapter = HistoricalRatesListAdapter()
+
+
+        val fromCurrency = DetailsFragmentArgs.fromBundle(requireArguments()).fromCurrency
+        val toCurrency = DetailsFragmentArgs.fromBundle(requireArguments()).toCurrency
+        binding.historicalRecyclerView.adapter =
+            HistoricalRatesListAdapter(fromCurrency, toCurrency)
         binding.historicalRecyclerView.addItemDecoration(
             DividerItemDecoration(
                 context, DividerItemDecoration.VERTICAL
             )
         )
-
-        val fromCurrency = DetailsFragmentArgs.fromBundle(requireArguments()).fromCurrency
-        val toCurrency = DetailsFragmentArgs.fromBundle(requireArguments()).toCurrency
-
         viewModel.retrieveHistoricalRates(fromCurrency, toCurrency)
 
         observeUI()

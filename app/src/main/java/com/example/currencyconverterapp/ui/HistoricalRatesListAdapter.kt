@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.currencyconverterapp.data.model.HistoricalRateModel
 import com.example.currencyconverterapp.databinding.CurrencyConversionListItemBinding
 
-class HistoricalRatesListAdapter :
+class HistoricalRatesListAdapter(fromCurrency: String, toCurrency: String) :
     ListAdapter<HistoricalRateModel, HistoricalRatesListAdapter.HistoricalRateViewHolder>(
         DiffCallback
     ) {
+
+    private val currencyFrom = fromCurrency
+    private val currencyTo = toCurrency
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoricalRateViewHolder {
         return HistoricalRateViewHolder(
@@ -23,14 +26,18 @@ class HistoricalRatesListAdapter :
 
     override fun onBindViewHolder(holder: HistoricalRateViewHolder, position: Int) {
         val historicalRateModel = getItem(position)
-        holder.bind(historicalRateModel)
+        holder.bind(historicalRateModel, currencyFrom, currencyTo)
     }
 
-    class HistoricalRateViewHolder(private var binding: CurrencyConversionListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: HistoricalRateModel) {
+    class HistoricalRateViewHolder(
+        private var binding: CurrencyConversionListItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            model: HistoricalRateModel, fromCurrency: String, toCurrency: String
+        ) {
             binding.model = model
-            binding.executePendingBindings()
+            binding.fromCurrency = fromCurrency
+            binding.toCurrency = toCurrency
         }
     }
 

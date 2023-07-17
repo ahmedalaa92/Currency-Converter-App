@@ -19,7 +19,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding">
 
         <TextView
             android:id="@+id/tvFromLabel"
@@ -85,5 +86,26 @@
             app:toCurrency="@{toCurrency}"
             tools:text="1.2" />
 
+        <TextView
+            android:id="@+id/tvDateLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRateLabel" />
+
+
+        <TextView
+            android:id="@+id/tvDateValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_padding"
+            android:text="@{model.date}"
+            android:textSize="@dimen/label_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/tvDateLabel"
+            app:layout_constraintStart_toEndOf="@id/tvDateLabel"
+            app:layout_constraintTop_toTopOf="@id/tvDateLabel"
+            tools:text="2023-03-19" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
