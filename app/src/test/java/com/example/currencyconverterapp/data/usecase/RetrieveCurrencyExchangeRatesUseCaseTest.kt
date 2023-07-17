@@ -40,7 +40,13 @@ class RetrieveCurrencyExchangeRatesUseCaseTest {
         val givenCurrencyRatesDTO = MockTestUtil.getMockCurrencyRates()
 
         // When
-        coEvery { repository.getCurrencyExchangeRates() }.returns(flowOf(DataState.success(givenCurrencyRatesDTO)))
+        coEvery { repository.getCurrencyExchangeRates() }.returns(
+            flowOf(
+                DataState.success(
+                    givenCurrencyRatesDTO
+                )
+            )
+        )
 
         // Invoke
         val currencyRatesDTO = retrieveCurrencyExchangeRatesUseCase()

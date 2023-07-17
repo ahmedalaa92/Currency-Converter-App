@@ -29,20 +29,24 @@ class MainViewModel @Inject constructor(
     val uiStateLiveData: LiveData<UIState>
         get() = _uiState
 
-    private var _currenciesList = MutableLiveData<List<CurrencyNamesEntity>>()
-    var currenciesLiveData: LiveData<List<CurrencyNamesEntity>> = _currenciesList
+    private val _currenciesList = MutableLiveData<List<CurrencyNamesEntity>>()
+    val currenciesLiveData: LiveData<List<CurrencyNamesEntity>>
+        get() = _currenciesList
 
-    private var _ratesList = MutableLiveData<Map<String, Double>>()
-    var ratesLiveData: LiveData<Map<String, Double>> = _ratesList
+    private val _ratesList = MutableLiveData<Map<String, Double>>()
+    val ratesLiveData: LiveData<Map<String, Double>>
+        get() = _ratesList
 
     private var _currencyExchangeModel = MutableLiveData<ExchangeRateModel>()
     var currencyExchangeModelLiveData: LiveData<ExchangeRateModel> = _currencyExchangeModel
 
-    private var _fromAmountValueLiveData = MutableLiveData<Double>()
-    var fromAmountValueLiveData: LiveData<Double> = _fromAmountValueLiveData
+    private val _fromAmountValueLiveData = MutableLiveData<Double>()
+    val fromAmountValueLiveData: LiveData<Double>
+        get() = _fromAmountValueLiveData
 
-    private var _toAmountValueLiveData = MutableLiveData<Double>()
-    var toAmountValueLiveData: LiveData<Double> = _toAmountValueLiveData
+    private val _toAmountValueLiveData = MutableLiveData<Double>()
+    val toAmountValueLiveData: LiveData<Double>
+        get() = _toAmountValueLiveData
 
     private val _swapCurrencies = MutableLiveData(false)
     val swapCurrencies: LiveData<Boolean>
